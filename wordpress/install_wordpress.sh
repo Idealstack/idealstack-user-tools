@@ -26,7 +26,8 @@ fi
 
 curl -s -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
-mkdir ~/bin
+
+mkdir -p ~/bin
 mv wp-cli.phar ~/bin/wp
 
 cd ~/public_html
