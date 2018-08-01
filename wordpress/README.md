@@ -6,9 +6,11 @@ This script installs the latest version of wordpress using WP-CLI.  You can also
 changes you can make using WP-CLI.
 
 How to use:
-    - Create a site in Idealstack
-    - Create a database in Idealstack for the site
-    - Run the command like this: ````
+- Create a site in Idealstack
+- Create a database in Idealstack for the site
+- Run the command like this: 
+
+````
 #If running it over ssh on an idealstack site
 curl -s  https://raw.githubusercontent.com/Idealstack/idealstack-user-tools/master/wordpress/install_wordpress.sh | bash -s -- <arguments>
 
