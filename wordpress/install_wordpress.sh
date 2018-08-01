@@ -24,14 +24,17 @@ Options:
     exit 1
 fi
 
+# Install WP-CLI
 curl -s -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
-
 mkdir -p ~/bin
+EXPORT PATH=$PATH:~/bin
 mv wp-cli.phar ~/bin/wp
 
 cd ~/public_html
-wp core download #Download wordpress
+
+#Download wordpress
+~/bin/wp core download 
 
 #Generate a random table prefix.  This is a good security enhancement
 PREFIX=wp_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 11 | head -n 1)_
@@ -40,4 +43,8 @@ PREFIX=wp_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 11 | head -n 1)_
 wp config create  --dbhost=database --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbprefix=$PREFIX
 wp core install --url=$URL --title="$TITLE" --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASS --admin_email=$ADMIN_EMAIL
 
+#Example of how to install plugins:
 #wp plugin install --activate w3-total-cache
+
+#Example of how to install themes
+#wp theme install --activate twentysixteen
