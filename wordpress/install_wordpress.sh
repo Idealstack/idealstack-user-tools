@@ -34,7 +34,7 @@ mv wp-cli.phar ~/bin/wp
 cd ~/public_html
 
 #Download wordpress
-~/bin/wp core download 
+wp core download 
 
 #Generate a random table prefix.  This is a good security enhancement
 PREFIX=wp_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 11 | head -n 1)_
