@@ -8,13 +8,13 @@ changes you can make using WP-CLI.
 How to use:
     - Create a site in Idealstack
     - Create a database in Idealstack for the site
-    - Run the command like this: ```
+    - Run the command like this: ````
 #If running it over ssh on an idealstack site
 curl -s  https://raw.githubusercontent.com/Idealstack/idealstack-user-tools/master/wordpress/install_wordpress.sh | bash -s -- <arguments>
 
 #Or run it on your local machine like this:
 ssh -p 2223 <idealstack user>@<idealstack ip> 'curl -s  https://raw.githubusercontent.com/Idealstack/idealstack-user-tools/master/wordpress/install_wordpress.sh | bash -s -- <arguments>'
-```
+````
 
 eg 
 
@@ -35,5 +35,4 @@ Success: Generated 'wp-config.php' file.
 Success: WordPress installed successfully.
 ````
 
- ## Customising install_wordpress.sh
 
