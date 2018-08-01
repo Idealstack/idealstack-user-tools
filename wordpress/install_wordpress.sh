@@ -21,13 +21,10 @@ Options:
     Admin Email:    Email address of the admin user of the site
     Admin Pass :    (Optional) Admin password for the site.  If omitted a random password will be generated    
     "
-
+    exit 1
 fi
 
-
-
-
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+curl -s -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 mkdir ~/bin
 mv wp-cli.phar ~/bin/wp
