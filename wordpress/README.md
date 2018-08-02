@@ -18,7 +18,23 @@ curl -s  https://raw.githubusercontent.com/Idealstack/idealstack-user-tools/mast
 ssh -p 2223 <idealstack user>@<idealstack ip> 'curl -s  https://raw.githubusercontent.com/Idealstack/idealstack-user-tools/master/wordpress/install_wordpress.sh | bash -s -- <arguments>'
 ````
 
-eg 
+## Arguments
+
+````
+    --db-master-user    (optional) Master user for the database server.  If passed, the db user, pass and database for wordpress will be created automatically
+    --db-master-pass:   (optional) Master user for the database server.  If passed, the db user, pass and database for wordpress will be created automatically
+    --db-name :         Name of the mysql database you've created for this site
+    --db-user :         Name of the database user for this site
+    --db-pass :         Mysql password for this site
+    --url     :         URL for the wordpress site
+    --title :           Title for the wordpress site
+    --admin-email:      Email address of the admin user of the site
+    --admin-pass:       (Optional) Admin password for the site.  If omitted a random password will be generated  
+
+````
+
+## Examples
+
 
 ````
 ssh -p 2223 test1@52.41.208.161 'curl -s  https://raw.githubusercontent.com/Idealstack/idealstack-user-tools/master/wordpress/install_wordpress.sh | bash -s -- wordpress1 wordpress1 wordpress1 http://test1.dxp32qvm517.jon.idealstack.net "Example Site" admin test@example.com fg3cclkas '
@@ -37,4 +53,5 @@ Success: Generated 'wp-config.php' file.
 Success: WordPress installed successfully.
 ````
 
-
+## Customising
+If you are planning to use this script as part of your own deployment scripts, we recomending forking and adding it to your own github repository.  Update the url in the examples above to use the correct raw url.  You can also use gist.github.com in the same way
