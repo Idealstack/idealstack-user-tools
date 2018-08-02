@@ -39,7 +39,7 @@ while true ; do
     esac
 done
 echo "Copy site $OLD_SITE_USER@OLD_SITE_PASS DB: $DB_NAME";
-if [ -z "$DB_USER" ] || [ -z "$DB_PASS" ] || [ -z "$DB_NAME" ] || [ -z "$OLD_SITE_USER" ] || [ -z "$OLD_SITE_PASS" ] || [ -z "$DB_MASTER_USER" ] || [ -z "$DB_MASTER_PASS" ]; then
+if [ -z "$DB_USER" ] || [ -z "$DB_PASS" ] || [ -z "$DB_NAME" ] || [ -z "$OLD_SITE_USER" ] || [ -z "$OLD_SITE_IP_ADDRESS" ] || [ -z "$DB_MASTER_USER" ] || [ -z "$DB_MASTER_PASS" ]; then
     print_usage
 fi
 
@@ -51,6 +51,6 @@ mysql  -h database -u $DB_MASTER_USER --password=$DB_MASTER_PASS << EOQ
         GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';
 EOQ
 
-#Dump the db
+echo "Dumping the old data and copying to new db"
 ssh -p 2223 $OLD_SITE_USER@$OLD_SITE_IP_ADDRESS  "mysqldump -h database -u $DB_USER --password=$DB_PASS $DB_NAME" | mysql -h database -u $DB_USER --password=$DB_PASS $DB_NAME
 
