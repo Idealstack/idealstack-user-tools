@@ -42,11 +42,11 @@ while true ; do
     esac
 done
 echo "Create WP site $URL <$TITLE> (User $ADMIN_USER) on db $DB_NAME MASTER_USER:$DB_MASTER_USER";
-if [ -z $DB_NAME ] || [ -z $URL ] || [ -z $TITLE ] || [ -z $ADMIN_USER ] || [ -z $ADMIN_PASS ]; then
+if [ -z "$DB_NAME" ] || [ -z "$URL" ] || [ -z "$TITLE" ] || [ -z "$ADMIN_USER" ] || [ -z "$ADMIN_PASS" ]; then
     print_usage
 fi
 
-if [ ! -z $DB_MASTER_USER ] && [ ! -z $DB_MASTER_PASS ]; then
+if [ ! -z "$DB_MASTER_USER" ] && [ ! -z "$DB_MASTER_PASS" ]; then
     echo "Creating database $DB_NAME"
     mysqladmin -h database -u "$DB_MASTER_USER" --password="$DB_MASTER_PASS" create $DB_NAME
     mysql  -h database -u $DB_MASTER_USER --password=$DB_MASTER_PASS << EOQ
