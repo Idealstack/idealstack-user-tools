@@ -37,7 +37,7 @@ ssh -p 2223 <idealstack user>@<idealstack ip> 'curl -s  https://raw.githubuserco
 
 
 ````
-ssh -p 2223 test1@52.41.208.161 'curl -s  https://raw.githubusercontent.com/Idealstack/idealstack-user-tools/master/wordpress/install_wordpress.sh | bash -s -- wordpress1 wordpress1 wordpress1 http://test1.dxp32qvm517.jon.idealstack.net "Example Site" admin test@example.com fg3cclkas '
+ssh -p 2223 test1@52.41.208.161 'curl -s  https://raw.githubusercontent.com/Idealstack/idealstack-user-tools/master/wordpress/install_wordpress.sh | bash -s -- --db-name=wordpress1 --db-user=wordpress1 --db-pass=wordpress1 --url=http://test1.dxp32qvm517.jon.idealstack.net --title="Example Site" --admin-user=admin --admin-email=test@example.com --admin-pass=fg3cclkas '
 
 ````
 

@@ -1,5 +1,8 @@
 #!/bin/bash
+
+#Exit if there are any errors:
 set -e
+
 function print_usage {
 
     echo "Usage $0 --db-master-user=[master db user] --db-master-pass=[master db pass]  --db-name=<db name> --db-host=<db user> --db-pass=<db pass> --url=<url> --title=<title> --admin-user=<admin user> --admin-email=<admin email> --admin-pass=[admin pass]
@@ -52,7 +55,7 @@ fi
 
 if [ -n $DB_MASTER_USER ] && [ -n $DB_MASTER_PASS ]; then
     echo "Creating database $DB_NAME"
-    mysqladmin -h database -u $DB_MASTER_USER --password=$DB_MASTER_PASS create $DB_NAME
+    mysqladmin -h database -u "$DB_MASTER_USER" --password="$DB_MASTER_PASS" create $DB_NAME
     mysql  -h database -u $DB_MASTER_USER --password=$DB_MASTER_PASS << EOQ
         GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';
 EOQ
