@@ -33,7 +33,7 @@ while true ; do
         --db-user) DB_USER="$2" ; shift 2;;
         --db-pass) DB_PASS="$2" ; shift 2;;
         --old-site-user) OLD_SITE_USER="$2" ; shift 2;;
-        --old-site-pass) OLD_SITE_PASS="$2" ; shift 2;;        
+        --old-site-ip) OLD_SITE_IP_ADDRESS="$2" ; shift 2;;        
         --) shift ; break ;;
         *) echo "No such argument: $1" ; exit 1 ;;
     esac

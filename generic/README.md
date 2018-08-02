@@ -28,8 +28,7 @@ ssh -p 2223 <idealstack user>@<idealstack ip> 'curl -s https://raw.githubusercon
 
 
 ````
-ssh -p 2223 test2@52.41.208.161 'curl -s  https://raw.githubusercontent.com/Idealstack/idealstack-user-tools/master/generic/copy_site.sh | bash -s --
---db-master-user=masterdb --db-master-pass='*#9!fI9zPv+rxtlu-si3Mq[R3N^Wvof2' --db-name=wordpress1 --db-user=wordpress1 --db-pass=wordpress1 --old-site-user=test444 --old-site-ip=31.23.4.22 '
+ssh -p 2223 test2@52.41.208.161 'curl -s  https://raw.githubusercontent.com/Idealstack/idealstack-user-tools/master/generic/copy_site_database.sh | bash -s -- --db-master-user=masterdb --db-master-pass='*#9!fI9zPv+rxtlu-si3Mq[R3N^Wvof2' --db-name=wordpress1 --db-user=wordpress1 --db-pass=wordpress1 --old-site-user=test444 --old-site-ip=31.23.4.22 '
 
 ````
 
