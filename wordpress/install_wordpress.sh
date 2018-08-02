@@ -22,13 +22,7 @@ OPTIONS
 
 }
 
-# read the options
-if [ -z $1 ] ; then
-    print_usage
-fi
-TEMP=`getopt   --long db-name:,db-user:,db-pass:,db-master-user:,db-master-pass:,url:,title:,admin-user:,admin-email:,admin-pass: -n '$0' -- "$@"`
-echo "OPTIONS:"
-echo $TEMP;
+TEMP=$(getopt  -o t --long db-name:,db-user:,db-pass:,db-master-user:,db-master-pass:,url:,title:,admin-user:,admin-email:,admin-pass: -n '$0' -- "$@")
 eval set -- "$TEMP"
 # extract options and their arguments into variables.
 while true ; do
@@ -52,7 +46,7 @@ if [ -z $DB_NAME ] || [ -z $URL ] || [ -z $TITLE ] || [ -z $ADMIN_USER ] || [ -z
     print_usage
 fi
 
-if [ -n $DB_MASTER_USER ] && [ -n $DB_MASTER_PASS ]; then
+if [ ! -z $DB_MASTER_USER ] && [ ! -z $DB_MASTER_PASS ]; then
     echo "Creating database $DB_NAME"
     mysqladmin -h database -u "$DB_MASTER_USER" --password="$DB_MASTER_PASS" create $DB_NAME
     mysql  -h database -u $DB_MASTER_USER --password=$DB_MASTER_PASS << EOQ
