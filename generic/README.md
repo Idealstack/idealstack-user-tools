@@ -53,7 +53,7 @@ eval `ssh-agent`
 ssh -A -p 2223 newsite@52.41.208.161 
 
 #Copy the files
-scp olduser@31.23.4.22:~/public_html/* public_html/ 
+scp -p 2223 olduser@31.23.4.22:~/public_html/* public_html/ 
 
 ```
 
