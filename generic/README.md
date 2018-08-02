@@ -1,7 +1,11 @@
 # Generic Tools
 
-
 # copy_site_database.sh
+
+Copy a database and it's user from one Idealstack stack to another
+
+The only tricky thing is you need to run an ssh-agent on your computer.  On "unix like"systems (linux, macos, windows-subsystem-for-linux or cygwin) that should be as simple as 'eval `ssh-agent`' and making sure you have the -A option to ssh (eg ssh -A -p 2223 <is user>@<is ip>).  If you are ssh'ing with putty or kitty on windows you run 'pageant' and import your key, and make sure ssh agent forwarding is turned on
+
 
 ````
 #If running it over ssh on an idealstack site
@@ -37,3 +41,19 @@ ssh -A -p 2223 test2@52.41.208.161 'curl -s  https://raw.githubusercontent.com/I
 
 ## Customising
 If you are planning to use this script as part of your own deployment scripts, we recomending forking and adding it to your own github repository.  Update the url in the examples above to use the correct raw url.  You can also use gist.github.com in the same way
+
+# Copy site files
+Copying the files of a site is easy enough that it doesn't need a script
+
+```
+#Ensure SSH agent is running
+eval `ssh-agent`
+
+#SSH to the new site
+ssh -A -p 2223 newsite@52.41.208.161 
+
+#Copy the files
+scp olduser@31.23.4.22:~/public_html/* public_html/ 
+
+```
+
