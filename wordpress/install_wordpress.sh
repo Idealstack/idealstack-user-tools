@@ -27,13 +27,12 @@ if [ -z $1 ] ; then
     print_usage
 fi
 TEMP=`getopt   --long db-name:,db-user:,db-pass:,db-master-user:,db-master-pass:,url:,title:,admin-user:,admin-email:,admin-pass: -n '$0' -- "$@"`
+echo "OPTIONS:"
 echo $TEMP;
 eval set -- "$TEMP"
 # extract options and their arguments into variables.
 while true ; do
     case "$1" in
-        -t|--tag)
-             TAG="$2" ;  shift 2 ;;
         --db-master-user) DB_MASTER_USER="$2" ; shift 2;;
         --db-master-pass) DB_MASTER_PASS="$2" ; shift 2;;
         --db-name) DB_NAME="$2" ; shift 2;;
@@ -48,7 +47,7 @@ while true ; do
         *) echo "No such argument: $1" ; exit 1 ;;
     esac
 done
-echo "Create WP site $URL <$TITLE> (User $ADMIN_USER) on db $DB_NAME";
+echo "Create WP site $URL <$TITLE> (User $ADMIN_USER) on db $DB_NAME MASTER_USER:$DB_MASTER_USER";
 if [ -z $DB_NAME ] || [ -z $URL ] || [ -z $TITLE ] || [ -z $ADMIN_USER ] || [ -z $ADMIN_PASS ]; then
     print_usage
 fi
