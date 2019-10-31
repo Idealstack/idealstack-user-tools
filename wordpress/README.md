@@ -30,6 +30,8 @@ ssh -p 2223 <idealstack user>@<idealstack ip> 'curl -s  https://raw.githubuserco
     --title :           Title for the wordpress site
     --admin-email:      Email address of the admin user of the site
     --admin-pass:       (Optional) Admin password for the site.  If omitted a random password will be generated  
+     --plugin           (Optional) Install a plugin.  Specify this option multiple times to install multiple plugins - eg '--plugin w3-total-cache --plugin woocommerce'
+     --theme            (Optional) Install a theme
 
 ````
 

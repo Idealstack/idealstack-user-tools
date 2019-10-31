@@ -16,13 +16,16 @@ OPTIONS
     --url     :         URL for the wordpress site
     --title :           Title for the wordpress site
     --admin-email:      Email address of the admin user of the site
-    --admin-pass:       (Optional) Admin password for the site.  If omitted a random password will be generated    
+    --admin-pass:       (Optional) Admin password for the site.  If omitted a random password will be generated
+     --plugin           (Optional) Install a plugin.  Specify this option multiple times to install multiple plugins - eg '--plugin w3-total-cache --plugin woocommerce'
+     --theme            (Optional) Install a theme
+
     "
     exit 1
 
 }
 
-TEMP=$(getopt  -o t --long db-name:,db-user:,db-pass:,db-master-user:,db-master-pass:,url:,title:,admin-user:,admin-email:,admin-pass: -n '$0' -- "$@")
+TEMP=$(getopt  -o t --long db-name:,db-user:,db-pass:,db-master-user:,db-master-pass:,url:,title:,admin-user:,admin-email:,admin-pass:,plugin:,theme: -n '$0' -- "$@")
 eval set -- "$TEMP"
 # extract options and their arguments into variables.
 while true ; do
@@ -37,6 +40,9 @@ while true ; do
         --admin-user) ADMIN_USER="$2" ; shift 2;;
         --admin-email) ADMIN_EMAIL="$2" ; shift 2;;
         --admin-pass) ADMIN_PASS="$2" ; shift 2;;
+        --plugin) PLUGINS="$PLUGINS $2" ; shift 2;;
+        --theme) THEME="$2" ; shift 2;;
+
         --) shift ; break ;;
         *) echo "No such argument: $1" ; exit 1 ;;
     esac
@@ -52,6 +58,8 @@ if [ ! -z "$DB_MASTER_USER" ] && [ ! -z "$DB_MASTER_PASS" ]; then
     mysql  -h database -u $DB_MASTER_USER --password=$DB_MASTER_PASS << EOQ
         GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';
 EOQ
+    #Dump the db
+    ssh -p 2223 $OLD_SITE_USER@$OLD_SITE_IP_ADDRESS  "mysqldump -h database -u $DB_USER --password=$DB_PASS $DB_NAME" | mysql -h database -u $DB_USER --password=$DB_PASS $DB_NAME
 
 fi
 
@@ -74,8 +82,12 @@ PREFIX=wp_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 11 | head -n 1)_
 wp config create  --dbhost=database --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbprefix=$PREFIX
 wp core install --url=$URL --title="$TITLE" --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASS --admin_email=$ADMIN_EMAIL
 
-#Example of how to install plugins:
-#wp plugin install --activate w3-total-cache
+#Install plugins:
+for plugin in $PLUGINS; do
+  wp plugin install --activate w3-total-cache
+done
 
-#Example of how to install themes
-#wp theme install --activate twentysixteen
+if [ ! -z "$THEME" ]; then
+  #install themes
+  wp theme install --activate $THEME
+fi

@@ -1,0 +1,17 @@
+/node_modules
+/public/storage
+/public/.rnd
+/vendor
+/.vagrant
+/.idea
+/.vscode
+/nbproject
+*~
+\#*\#
+/*.log
+/storage/*.key
+npm-debug.log
+yarn-error.log
+.env
+.phpunit.result.cache
+.phpunit.result.cache
